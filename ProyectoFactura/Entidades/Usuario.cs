@@ -14,16 +14,18 @@ namespace Entidades
         public string Clave { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
+        public byte[] Foto { get; set; }
 
         public Usuario() { }
 
-        public Usuario(string codigo, string nombre, string clave, string correo, string telefono)
+        public Usuario(string codigo, string nombre, string clave, string correo, string telefono, byte[] foto)
         {
             Codigo = codigo;
             Nombre = nombre;
             Clave = clave;
             Correo = correo;
             Telefono = telefono;
+            Foto = foto;
         }
 
         public Usuario(string codigo, string clave)

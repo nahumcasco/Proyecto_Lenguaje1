@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.CodigoTextBox = new System.Windows.Forms.TextBox();
             this.NombreTextBox = new System.Windows.Forms.TextBox();
@@ -44,11 +45,12 @@
             this.EliminarButton = new System.Windows.Forms.Button();
             this.ModificarButton = new System.Windows.Forms.Button();
             this.NuevoButton = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.FotoPictureBox = new System.Windows.Forms.PictureBox();
+            this.AdjuntarFotoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FotoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -63,6 +65,7 @@
             // 
             // CodigoTextBox
             // 
+            this.CodigoTextBox.Enabled = false;
             this.CodigoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodigoTextBox.Location = new System.Drawing.Point(141, 29);
             this.CodigoTextBox.Name = "CodigoTextBox";
@@ -71,6 +74,7 @@
             // 
             // NombreTextBox
             // 
+            this.NombreTextBox.Enabled = false;
             this.NombreTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NombreTextBox.Location = new System.Drawing.Point(141, 67);
             this.NombreTextBox.Name = "NombreTextBox";
@@ -89,9 +93,11 @@
             // 
             // ClaveTextBox
             // 
+            this.ClaveTextBox.Enabled = false;
             this.ClaveTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClaveTextBox.Location = new System.Drawing.Point(141, 104);
             this.ClaveTextBox.Name = "ClaveTextBox";
+            this.ClaveTextBox.PasswordChar = '*';
             this.ClaveTextBox.Size = new System.Drawing.Size(359, 22);
             this.ClaveTextBox.TabIndex = 5;
             // 
@@ -107,6 +113,7 @@
             // 
             // CorreoTextBox
             // 
+            this.CorreoTextBox.Enabled = false;
             this.CorreoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CorreoTextBox.Location = new System.Drawing.Point(141, 144);
             this.CorreoTextBox.Name = "CorreoTextBox";
@@ -125,6 +132,7 @@
             // 
             // TelefonoTextBox
             // 
+            this.TelefonoTextBox.Enabled = false;
             this.TelefonoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TelefonoTextBox.Location = new System.Drawing.Point(141, 182);
             this.TelefonoTextBox.Name = "TelefonoTextBox";
@@ -143,17 +151,14 @@
             // 
             // UsuariosDataGridView
             // 
+            this.UsuariosDataGridView.AllowUserToAddRows = false;
+            this.UsuariosDataGridView.AllowUserToDeleteRows = false;
             this.UsuariosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UsuariosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
             this.UsuariosDataGridView.Location = new System.Drawing.Point(0, 286);
             this.UsuariosDataGridView.Name = "UsuariosDataGridView";
+            this.UsuariosDataGridView.ReadOnly = true;
             this.UsuariosDataGridView.Size = new System.Drawing.Size(748, 207);
             this.UsuariosDataGridView.TabIndex = 15;
-            this.UsuariosDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UsuariosDataGridView_CellContentClick);
             // 
             // CancelarButton
             // 
@@ -166,6 +171,7 @@
             this.CancelarButton.Text = "Cancelar";
             this.CancelarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
             // 
             // GuardarButton
             // 
@@ -178,6 +184,7 @@
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // EliminarButton
             // 
@@ -190,6 +197,7 @@
             this.EliminarButton.Text = "Eliminar";
             this.EliminarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EliminarButton.UseVisualStyleBackColor = true;
+            this.EliminarButton.Click += new System.EventHandler(this.EliminarButton_Click);
             // 
             // ModificarButton
             // 
@@ -202,6 +210,7 @@
             this.ModificarButton.Text = "Modificar";
             this.ModificarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ModificarButton.UseVisualStyleBackColor = true;
+            this.ModificarButton.Click += new System.EventHandler(this.ModificarButton_Click);
             // 
             // NuevoButton
             // 
@@ -214,32 +223,40 @@
             this.NuevoButton.Text = "Nuevo";
             this.NuevoButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.NuevoButton.UseVisualStyleBackColor = true;
+            this.NuevoButton.Click += new System.EventHandler(this.NuevoButton_Click);
             // 
-            // Column1
+            // errorProvider1
             // 
-            this.Column1.HeaderText = "Codigo";
-            this.Column1.Name = "Column1";
+            this.errorProvider1.ContainerControl = this;
             // 
-            // Column2
+            // FotoPictureBox
             // 
-            this.Column2.HeaderText = "Nombre";
-            this.Column2.Name = "Column2";
+            this.FotoPictureBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.FotoPictureBox.Location = new System.Drawing.Point(530, 29);
+            this.FotoPictureBox.Name = "FotoPictureBox";
+            this.FotoPictureBox.Size = new System.Drawing.Size(206, 175);
+            this.FotoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FotoPictureBox.TabIndex = 16;
+            this.FotoPictureBox.TabStop = false;
             // 
-            // Column3
+            // AdjuntarFotoButton
             // 
-            this.Column3.HeaderText = "Clave";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Correo";
-            this.Column4.Name = "Column4";
+            this.AdjuntarFotoButton.Enabled = false;
+            this.AdjuntarFotoButton.Location = new System.Drawing.Point(710, 205);
+            this.AdjuntarFotoButton.Name = "AdjuntarFotoButton";
+            this.AdjuntarFotoButton.Size = new System.Drawing.Size(25, 22);
+            this.AdjuntarFotoButton.TabIndex = 17;
+            this.AdjuntarFotoButton.Text = "...";
+            this.AdjuntarFotoButton.UseVisualStyleBackColor = true;
+            this.AdjuntarFotoButton.Click += new System.EventHandler(this.AdjuntarFotoButton_Click);
             // 
             // Usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 493);
+            this.Controls.Add(this.AdjuntarFotoButton);
+            this.Controls.Add(this.FotoPictureBox);
             this.Controls.Add(this.UsuariosDataGridView);
             this.Controls.Add(this.CancelarButton);
             this.Controls.Add(this.GuardarButton);
@@ -258,7 +275,10 @@
             this.Controls.Add(this.label1);
             this.Name = "Usuarios";
             this.Text = "Usuarios";
+            this.Load += new System.EventHandler(this.Usuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FotoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,9 +302,8 @@
         private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.Button CancelarButton;
         private System.Windows.Forms.DataGridView UsuariosDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox FotoPictureBox;
+        private System.Windows.Forms.Button AdjuntarFotoButton;
     }
 }

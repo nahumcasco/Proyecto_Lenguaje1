@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Datos;
 using Entidades;
 
 namespace Factura
@@ -49,13 +50,21 @@ namespace Factura
             }
             errorProvider1.Clear();
 
-            user = new Usuario(CodigoTextBox.Text, ClaveTextBox.Text);
+            //user = new Usuario(CodigoTextBox.Text, ClaveTextBox.Text);
 
-            if (user.Codigo.ToUpper() == _codigoUsuario && user.Clave == _Clave)
+            UsuarioDatos userDatos = new UsuarioDatos();
+
+            bool usuarioValido = userDatos.ValidarLogin(CodigoTextBox.Text, ClaveTextBox.Text);
+
+
+            if (usuarioValido)
             {
-                Menu miMenu = new Menu();
+                MenuDos menu = new MenuDos();
                 this.Hide();
-                miMenu.Show();
+                menu.Show();
+                //Menu miMenu = new Menu();
+                //this.Hide();
+                //miMenu.Show();
 
             }
             else

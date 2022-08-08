@@ -21,5 +21,11 @@ namespace Factura
         {
             Application.Exit();
         }
+
+        private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Usuarios usuarios = new Usuarios();
+            usuarios.Show();
+        }
     }
 }
