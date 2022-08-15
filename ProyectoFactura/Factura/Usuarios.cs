@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +23,14 @@ namespace Factura
         BindingList<Usuario> listaUsuarios = new BindingList<Usuario>();
         Usuario user;
 
+        UsuarioDatos userDatos = new UsuarioDatos();
+
 
         private void ListarUsuarios()
         {
             UsuariosDataGridView.DataSource = null;
-            UsuariosDataGridView.DataSource = listaUsuarios;
+            //UsuariosDataGridView.DataSource = listaUsuarios;
+            UsuariosDataGridView.DataSource = userDatos.DevolverTodos();
         }
 
         private void HabilitarControles()
@@ -89,8 +93,8 @@ namespace Factura
             }
             errorProvider1.Clear();
 
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            FotoPictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            //System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            //FotoPictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
 
 
             //Creamos un objeto de la clase Usuario
@@ -101,33 +105,55 @@ namespace Factura
             user.Clave = ClaveTextBox.Text;
             user.Correo = CorreoTextBox.Text;
             user.Telefono = TelefonoTextBox.Text;
-            user.Foto = ms.GetBuffer();
+            //user.Foto = ms.GetBuffer();
 
 
             if (operacion == "Nuevo")
             {
-                listaUsuarios.Add(user);
-                ListarUsuarios();
+                //listaUsuarios.Add(user);
 
-                LimpiarControles();
-                DesabilitarControles();
+                bool inserto = userDatos.Nuevo(user);
+                if (inserto)
+                {
+                    ListarUsuarios();
+                    LimpiarControles();
+                    DesabilitarControles();
+                    MessageBox.Show("Usuario creado exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo guardar el usuario");
+                }
+
+                
             }
             else if(operacion == "Modificar")
             {
-                foreach (Usuario item in listaUsuarios)
-                {
-                    if (item.Codigo == CodigoTextBox.Text)
-                    {
-                        item.Nombre = NombreTextBox.Text;
-                        item.Clave = ClaveTextBox.Text;
-                        item.Correo = CorreoTextBox.Text;
-                        item.Telefono = TelefonoTextBox.Text;
+                //foreach (Usuario item in listaUsuarios)
+                //{
+                //    if (item.Codigo == CodigoTextBox.Text)
+                //    {
+                //        item.Nombre = NombreTextBox.Text;
+                //        item.Clave = ClaveTextBox.Text;
+                //        item.Correo = CorreoTextBox.Text;
+                //        item.Telefono = TelefonoTextBox.Text;
                         
-                    }
+                //    }
+                //}
+
+                bool modifico = userDatos.Actualizar(user);
+                if (modifico)
+                {
+                    ListarUsuarios();
+                    LimpiarControles();
+                    DesabilitarControles();
+                    MessageBox.Show("Usuario actualizado exitosamente");
                 }
-                ListarUsuarios();
-                LimpiarControles();
-                DesabilitarControles();
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar el usuario");
+                }
+                
             }
             
         }
@@ -149,8 +175,8 @@ namespace Factura
                 CodigoTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Codigo"].Value.ToString();
                 NombreTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
                 ClaveTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Clave"].Value.ToString();
-                CorreoTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Correo"].Value.ToString();
-                TelefonoTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Telefono"].Value.ToString();
+                CorreoTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Email"].Value.ToString();
+                //TelefonoTextBox.Text = UsuariosDataGridView.CurrentRow.Cells["Telefono"].Value.ToString();
                 //FotoPictureBox.Image = (byte[])UsuariosDataGridView.CurrentRow.Cells["Foto"].Value;
             }
             else
@@ -163,16 +189,27 @@ namespace Factura
         {
             if (UsuariosDataGridView.SelectedRows.Count > 0)
             {
-                foreach (var user in listaUsuarios)
+                bool elimino = userDatos.Eliminar(UsuariosDataGridView.CurrentRow.Cells["Codigo"].Value.ToString());
+                if (elimino)
                 {
-                    if (user.Codigo == UsuariosDataGridView.CurrentRow.Cells["Codigo"].Value.ToString())
-                    {
-                        listaUsuarios.Remove(user);
-                        break;
-                    }
+                    ListarUsuarios();
+                    MessageBox.Show("Usuario eliminado exitosamente");
                 }
+                else
+                {
+                    MessageBox.Show("Usuario no se pudo eliminar");
+                }
+
+                //foreach (var user in listaUsuarios)
+                //{
+                //    if (user.Codigo == UsuariosDataGridView.CurrentRow.Cells["Codigo"].Value.ToString())
+                //    {
+                //        listaUsuarios.Remove(user);
+                //        break;
+                //    }
+                //}
             }
-            ListarUsuarios();
+            
         }
 
         private void AdjuntarFotoButton_Click(object sender, EventArgs e)
